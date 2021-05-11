@@ -82,7 +82,5 @@ led_config_t g_led_config = {
 void matrix_init_kb(void) {
     matrix_init_user();
     //rgb_matrix_set_flags(LED_FLAG_UNDERGLOW);
-    rgb_matrix_mode(RGB_MATRIX_DIGITAL_RAIN);
-    rgb_matrix_decrease_speed();
-    rgb_matrix_decrease_speed();
+    rgb_matrix_mode(RGB_MATRIX_CYCLE_LEFT_RIGHT);
 }
