@@ -34,7 +34,9 @@ enum custom_keycodes {
     KC_NXTWD,
     KC_LSTRT,
     KC_LEND,
-    KC_DLINE
+    KC_DLINE,
+    UNDO,
+    REDO
 };
 
 
@@ -339,6 +341,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_BSPC);
             }
             break;
+        case UNDO:
+            if (record->event.pressed){
+                register_code(KC_LCTRL);
+                register_code(KC_Z);
+            } else {
+                unregister_code(KC_LCTRL);
+                unregister_code(KC_Z);
+            }
+            break;
+        case REDO:
+            if (record->event.pressed){
+                register_code(KC_LCTRL);
+                register_code(KC_Y);
+            } else {
+                unregister_code(KC_LCTRL);
+                unregister_code(KC_Y);
+            }
+            break;
     }
     return true;
 }
@@ -381,12 +401,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else {
         if (index == 1) { /* First encoder */
-            if (clockwise) {
-                tap_code(KC_PGUP);
-                // tap_code(KC_MS_WH_UP);
+            if (!clockwise) {
+                register_code(KC_LCTRL);
+                register_code(KC_Y);
+                unregister_code(KC_LCTRL);
+                unregister_code(KC_Y);
             } else {
-                tap_code(KC_PGDOWN);
-                // tap_code(KC_MS_WH_DOWN);
+                register_code(KC_LCTRL);
+                register_code(KC_Z);
+                unregister_code(KC_LCTRL);
+                unregister_code(KC_Z);
             }
         } else if (index == 0) { /* Second encoder */
             uint16_t mapped_code        = 0;
