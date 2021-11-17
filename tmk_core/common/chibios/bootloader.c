@@ -95,7 +95,29 @@ void enter_bootloader_mode_if_requested(void) {
     }
 }
 
-#elif defined(KL2x) || defined(K20x) || defined(MK66F18)  // STM32_BOOTLOADER_DUAL_BANK // STM32_BOOTLOADER_ADDRESS
+#elif defined(GD32VF103)
+
+#    define DBGMCU_KEY_UNLOCK 0x4B5A6978
+#    define DBGMCU_CMD_RESET 0x1
+
+__IO uint32_t *DBGMCU_KEY = (uint32_t *)DBGMCU_BASE + 0x0CU;
+__IO uint32_t *DBGMCU_CMD = (uint32_t *)DBGMCU_BASE + 0x08U;
+
+__attribute__((weak)) void bootloader_jump(void) {
+    /* The MTIMER unit of the GD32VF103 doesn't have the MSFRST
+     * register to generate a software reset request.
+     * BUT instead two undocumented registers in the debug peripheral
+     * that allow issueing a software reset. WHO would need the MSFRST
+     * register anyway? Source:
+     * https://github.com/esmil/gd32vf103inator/blob/master/include/gd32vf103/dbg.h */
+    *DBGMCU_KEY = DBGMCU_KEY_UNLOCK;
+    *DBGMCU_CMD = DBGMCU_CMD_RESET;
+}
+
+void enter_bootloader_mode_if_requested(void) { /* Jumping to bootloader is not possible from user code. */
+}
+
+#elif defined(KL2x) || defined(K20x) || defined(MK66F18) || defined(MIMXRT1062)  // STM32_BOOTLOADER_DUAL_BANK // STM32_BOOTLOADER_ADDRESS
 /* Kinetis */
 
 #    if defined(BOOTLOADER_KIIBOHD)
@@ -103,7 +125,8 @@ void enter_bootloader_mode_if_requested(void) {
 #        define SCB_AIRCR_VECTKEY_WRITEMAGIC 0x05FA0000
 const uint8_t              sys_reset_to_loader_magic[] = "\xff\x00\x7fRESET TO LOADER\x7f\x00\xff";
 __attribute__((weak)) void bootloader_jump(void) {
-    __builtin_memcpy((void *)VBAT, (const void *)sys_reset_to_loader_magic, sizeof(sys_reset_to_loader_magic));
+    void *volatile vbat = (void *)VBAT;
+    __builtin_memcpy(vbat, (const void *)sys_reset_to_loader_magic, sizeof(sys_reset_to_loader_magic));
     // request reset
     SCB->AIRCR = SCB_AIRCR_VECTKEY_WRITEMAGIC | SCB_AIRCR_SYSRESETREQ_Msk;
 }

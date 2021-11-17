@@ -31,13 +31,13 @@ def check_returncode(result, expected=[0]):
     assert result.returncode in expected
 
 
-def test_cformat():
-    result = check_subcommand('cformat', '-n', 'quantum/matrix.c')
+def test_format_c():
+    result = check_subcommand('format-c', '-n', 'quantum/matrix.c')
     check_returncode(result)
 
 
-def test_cformat_all():
-    result = check_subcommand('cformat', '-n', '-a')
+def test_format_c_all():
+    result = check_subcommand('format-c', '-n', '-a')
     check_returncode(result, [0, 1])
 
 
@@ -80,10 +80,10 @@ def test_hello():
     assert 'Hello,' in result.stdout
 
 
-def test_pyformat():
-    result = check_subcommand('pyformat', '--dry-run')
+def test_format_python():
+    result = check_subcommand('format-python', '--dry-run')
     check_returncode(result)
-    assert 'Python code in `bin/qmk` and `lib/python` is correctly formatted.' in result.stdout
+    assert 'Python code in `lib/python` is correctly formatted.' in result.stdout
 
 
 def test_list_keyboards():
@@ -151,7 +151,7 @@ def test_json2c_stdin():
 def test_info():
     result = check_subcommand('info', '-kb', 'handwired/pytest/basic')
     check_returncode(result)
-    assert 'Keyboard Name: handwired/pytest/basic' in result.stdout
+    assert 'Keyboard Name: pytest' in result.stdout
     assert 'Processor: atmega32u4' in result.stdout
     assert 'Layout:' not in result.stdout
     assert 'k0' not in result.stdout
@@ -160,7 +160,7 @@ def test_info():
 def test_info_keyboard_render():
     result = check_subcommand('info', '-kb', 'handwired/pytest/basic', '-l')
     check_returncode(result)
-    assert 'Keyboard Name: handwired/pytest/basic' in result.stdout
+    assert 'Keyboard Name: pytest' in result.stdout
     assert 'Processor: atmega32u4' in result.stdout
     assert 'Layouts:' in result.stdout
     assert 'k0' in result.stdout
@@ -169,7 +169,7 @@ def test_info_keyboard_render():
 def test_info_keymap_render():
     result = check_subcommand('info', '-kb', 'handwired/pytest/basic', '-km', 'default_json')
     check_returncode(result)
-    assert 'Keyboard Name: handwired/pytest/basic' in result.stdout
+    assert 'Keyboard Name: pytest' in result.stdout
     assert 'Processor: atmega32u4' in result.stdout
 
     if is_windows:
@@ -181,7 +181,7 @@ def test_info_keymap_render():
 def test_info_matrix_render():
     result = check_subcommand('info', '-kb', 'handwired/pytest/basic', '-m')
     check_returncode(result)
-    assert 'Keyboard Name: handwired/pytest/basic' in result.stdout
+    assert 'Keyboard Name: pytest' in result.stdout
     assert 'Processor: atmega32u4' in result.stdout
     assert 'LAYOUT_ortho_1x1' in result.stdout
 
@@ -242,7 +242,7 @@ def test_generate_config_h():
     assert '#   define DESCRIPTION handwired/pytest/basic' in result.stdout
     assert '#   define DIODE_DIRECTION COL2ROW' in result.stdout
     assert '#   define MANUFACTURER none' in result.stdout
-    assert '#   define PRODUCT handwired/pytest/basic' in result.stdout
+    assert '#   define PRODUCT pytest' in result.stdout
     assert '#   define PRODUCT_ID 0x6465' in result.stdout
     assert '#   define VENDOR_ID 0xFEED' in result.stdout
     assert '#   define MATRIX_COLS 1' in result.stdout
@@ -258,6 +258,12 @@ def test_generate_rules_mk():
     assert 'MCU ?= atmega32u4' in result.stdout
 
 
+def test_generate_version_h():
+    result = check_subcommand('generate-version-h')
+    check_returncode(result)
+    assert '#define QMK_VERSION' in result.stdout
+
+
 def test_generate_layouts():
     result = check_subcommand('generate-layouts', '-kb', 'handwired/pytest/basic')
     check_returncode(result)
@@ -267,7 +273,7 @@ def test_generate_layouts():
 def test_format_json_keyboard():
     result = check_subcommand('format-json', '--format', 'keyboard', 'lib/python/qmk/tests/minimal_info.json')
     check_returncode(result)
-    assert result.stdout == '{\n    "keyboard_name": "tester",\n    "maintainer": "qmk",\n    "height": 5,\n    "width": 15,\n    "layouts": {\n        "LAYOUT": {\n            "layout": [\n                { "label": "KC_A", "matrix": [0, 0], "x": 0, "y": 0 }\n            ]\n        }\n    }\n}\n'
+    assert result.stdout == '{\n    "keyboard_name": "tester",\n    "maintainer": "qmk",\n    "layouts": {\n        "LAYOUT": {\n            "layout": [\n                { "label": "KC_A", "matrix": [0, 0], "x": 0, "y": 0 }\n            ]\n        }\n    }\n}\n'
 
 
 def test_format_json_keymap():
@@ -279,7 +285,7 @@ def test_format_json_keymap():
 def test_format_json_keyboard_auto():
     result = check_subcommand('format-json', '--format', 'auto', 'lib/python/qmk/tests/minimal_info.json')
     check_returncode(result)
-    assert result.stdout == '{\n    "keyboard_name": "tester",\n    "maintainer": "qmk",\n    "height": 5,\n    "width": 15,\n    "layouts": {\n        "LAYOUT": {\n            "layout": [\n                { "label": "KC_A", "matrix": [0, 0], "x": 0, "y": 0 }\n            ]\n        }\n    }\n}\n'
+    assert result.stdout == '{\n    "keyboard_name": "tester",\n    "maintainer": "qmk",\n    "layouts": {\n        "LAYOUT": {\n            "layout": [\n                { "label": "KC_A", "matrix": [0, 0], "x": 0, "y": 0 }\n            ]\n        }\n    }\n}\n'
 
 
 def test_format_json_keymap_auto():
