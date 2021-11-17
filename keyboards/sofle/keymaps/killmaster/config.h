@@ -43,9 +43,9 @@ for more options.
 #define RGBLED_NUM 70
 #define RGB_SPLIT {36,36}
 #define RGBLIGHT_LIMIT_VAL 120
-//   #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+   #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 // /*== all animations enable ==*/
-//   #define RGBLIGHT_ANIMATIONS
+   #define RGBLIGHT_ANIMATIONS
 // /*== or choose animations ==*/
 //   #define RGBLIGHT_EFFECT_BREATHING
    //#define RGBLIGHT_EFFECT_RAINBOW_MOOD
@@ -53,8 +53,8 @@ for more options.
 //   #define RGBLIGHT_EFFECT_SNAKE
 //   #define RGBLIGHT_EFFECT_KNIGHT
 //   #define RGBLIGHT_EFFECT_CHRISTMAS
-   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
-   #define RGBLIGHT_EFFECT_RGB_TEST
+//   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+//   #define RGBLIGHT_EFFECT_RGB_TEST
 //   #define RGBLIGHT_EFFECT_ALTERNATING
 #endif
 
