@@ -24,9 +24,10 @@ for more options.
 
 #ifdef OLED_ENABLE 
    #define SPLIT_OLED_ENABLE
-   #define OLED_TIMEOUT 5000
+   #define OLED_TIMEOUT 10000
    #define OLED_FADE_OUT
-   #define OLED_FADE_OUT_INTERVAL 5
+   #define OLED_FADE_OUT_INTERVAL 10
+   #define OLED_BRIGHTNESS 120
 #endif
 #ifdef RGB_MATRIX_ENABLE
 
