@@ -22,6 +22,12 @@ for more options.
 
 #define RGB_DI_PIN D3
 
+#ifdef OLED_ENABLE 
+   #define SPLIT_OLED_ENABLE
+   #define OLED_TIMEOUT 5000
+   #define OLED_FADE_OUT
+   #define OLED_FADE_OUT_INTERVAL 5
+#endif
 #ifdef RGB_MATRIX_ENABLE
 
 #define RGBLED_NUM 72
