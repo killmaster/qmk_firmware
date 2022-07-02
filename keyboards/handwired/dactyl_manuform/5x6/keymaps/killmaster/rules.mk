@@ -1,0 +1,3 @@
+VIA_ENABLE = yes    # Enable VIA
+UCIS_ENABLE = yes
+EXTRAKEY_ENABLE = yes

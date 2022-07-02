@@ -27,3 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Rows are doubled-up
 
 #define QMK_KEYS_PER_SCAN 8
+
+#if defined UNICODEMAP_ENABLE || defined UCIS_ENABLE
+#define UNICODE_SELECTED_MODES UC_WINC
+#define UCIS_MAX_CODE_POINTS 15
+#endif
