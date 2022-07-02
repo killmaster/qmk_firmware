@@ -4,3 +4,7 @@ RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
 RGBLIGHT_ENABLE = no
 BACKLIGHT_ENABLE = no
+<<<<<<< HEAD
+=======
+UNICODEMAP_ENABLE = yes
+>>>>>>> b6149001f9... unicode and emojis
