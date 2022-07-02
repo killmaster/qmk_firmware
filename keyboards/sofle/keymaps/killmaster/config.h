@@ -66,6 +66,7 @@ for more options.
 #define USB_POLLING_INTERVAL_MS 1
 #define QMK_KEYS_PER_SCAN 12
 
-#ifdef UNICODEMAP_ENABLE
+#if defined UNICODEMAP_ENABLE || defined UCIS_ENABLE
 #define UNICODE_SELECTED_MODES UC_WINC
+#define UCIS_MAX_CODE_POINTS 15
 #endif

@@ -36,7 +36,8 @@ enum custom_keycodes {
     KC_LEND,
     KC_DLINE,
     UNDO,
-    REDO
+    REDO,
+    KC_UCIS
 };
 
 #ifdef UNICODEMAP_ENABLE
@@ -44,7 +45,9 @@ enum unicode_names {
     BANG,
     IRONY,
     SNEK,
-    BANANA
+    BANANA,
+    POOP,
+    EGGPLANT
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -54,6 +57,20 @@ const uint32_t PROGMEM unicode_map[] = {
     [BANANA]= 0x1F34C  // 🍌
 };
 
+#endif
+
+#ifdef UCIS_ENABLE
+const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
+    UCIS_SYM("poop", 0x1F4A9),                   // 💩
+    UCIS_SYM("look", 0x0CA0, 0x005F, 0x0CA0),    // ಠ_ಠ
+    UCIS_SYM("sus", 0xD9E),                      // ඞ
+    UCIS_SYM("banana", 0x1F34C),                 // 🍌
+    UCIS_SYM("penis", 0x1F346),                  // 🍆
+    UCIS_SYM("shrug", 0xAF, 0x5C, 0x5F, 0x28, 0x30C4, 0x29, 0x5F, 0x2F, 0xAF),                  //¯\_(ツ)_/¯
+    UCIS_SYM("lenny", 0x28, 0x20, 0x361, 0xB0, 0x20, 0x35C, 0x296, 0x20, 0x361, 0xB0, 0x29),    // ( ͡° ͜ʖ ͡°)
+    UCIS_SYM("gary", 0x1555, 0x28, 0x20, 0x141B, 0x20, 0x29, 0x1557),                           // ᕕ( ᐛ )ᕗ
+    UCIS_SYM("donger", 0x30FD, 0xF3C, 0xE88, 0x644, 0x35C, 0xE88, 0xF3D, 0xFF89)                // ヽ༼ຈل͜ຈ༽ﾉ
+);
 #endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -96,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
   KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-  _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       X(BANANA), X(SNEK), X(BANG), X(IRONY),    KC_0,  KC_F12,
+  KC_UCIS,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6, KC_7, KC_8, KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,       _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
@@ -375,6 +392,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Y);
             }
             break;
+        case KC_UCIS:
+            if (record->event.pressed){
+                qk_ucis_start();
+            }
+            return false;
     }
     return true;
 }
