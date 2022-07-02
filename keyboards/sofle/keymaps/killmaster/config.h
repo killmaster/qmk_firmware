@@ -29,7 +29,6 @@ for more options.
    #define OLED_FADE_OUT_INTERVAL 10
    #define OLED_BRIGHTNESS 100
 #endif
-<<<<<<< HEAD
 #ifdef RGB_MATRIX_ENABLE
 
 #define RGBLED_NUM 72
@@ -69,8 +68,6 @@ for more options.
 //   #define RGBLIGHT_EFFECT_ALTERNATING
 #endif
 
-=======
->>>>>>> e0410507cb... some changes and a new layout for sofle w/o LEDs
 #define MEDIA_KEY_DELAY 2
 
 #define USB_POLLING_INTERVAL_MS 1
