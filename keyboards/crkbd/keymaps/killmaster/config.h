@@ -21,6 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 #define MASTER_LEFT
+#define GRAVE_ESC_ALT_OVERRIDE
+#define GRAVE_ESC_CTRL_OVERRIDE
+#define GRAVE_ESC_GUI_OVERRIDE
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
@@ -37,11 +40,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define SPLIT_TRANSPORT_MIRROR
 #define ENABLE_RGB_MATRIX_CYCLE_ALL
+#define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 #define ENABLE_RGB_MATRIX_BREATHING
 #define ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROP
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
 #define ENABLE_RGB_MATRIX_MULTISPLASH
-#define ENABLE_RGB_MATRIX_DIGITAL_RAIN
 #endif
 
 #ifdef RGBLIGHT_ENABLE

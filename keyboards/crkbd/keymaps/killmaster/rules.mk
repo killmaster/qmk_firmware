@@ -4,7 +4,7 @@ RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
 
 VIA_ENABLE          = yes    # Enable VIA
-OLED_ENABLE = no
+OLED_ENABLE = yes 
 OLED_DRIVER = SSD1306
 LTO_ENABLE          = yes
 UCIS_ENABLE = yes

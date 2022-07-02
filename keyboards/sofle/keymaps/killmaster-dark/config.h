@@ -29,7 +29,6 @@ for more options.
    #define OLED_FADE_OUT_INTERVAL 10
    #define OLED_BRIGHTNESS 100
 #endif
-<<<<<<< HEAD
 #ifdef RGB_MATRIX_ENABLE
 
 #define RGBLED_NUM 72
@@ -56,7 +55,7 @@ for more options.
 #define RGBLIGHT_LIMIT_VAL 120
 //   #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 // /*== all animations enable ==*/
-//   #define RGBLIGHT_ANIMATIONS
+   #define RGBLIGHT_ANIMATIONS
 // /*== or choose animations ==*/
 //   #define RGBLIGHT_EFFECT_BREATHING
    //#define RGBLIGHT_EFFECT_RAINBOW_MOOD
@@ -64,13 +63,11 @@ for more options.
 //   #define RGBLIGHT_EFFECT_SNAKE
 //   #define RGBLIGHT_EFFECT_KNIGHT
 //   #define RGBLIGHT_EFFECT_CHRISTMAS
-   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
-   #define RGBLIGHT_EFFECT_RGB_TEST
+//   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+//   #define RGBLIGHT_EFFECT_RGB_TEST
 //   #define RGBLIGHT_EFFECT_ALTERNATING
 #endif
 
-=======
->>>>>>> e0410507cb... some changes and a new layout for sofle w/o LEDs
 #define MEDIA_KEY_DELAY 2
 
 #define USB_POLLING_INTERVAL_MS 1
